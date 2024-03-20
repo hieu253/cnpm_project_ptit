@@ -1,0 +1,24 @@
+<div class="mt-4">
+  <div class="row">
+    {{#each cats}}
+      <style>
+        .card{ margin-top:20px; margin-left: 20px; margin-right: 20px;
+        margin-bottom: 20px;} .card-title { text-align: center; } h6{
+        text-align: center;}
+      </style>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card" style="width: 18rem;">
+          <img src="{{this.image}}" class="card-img-top" alt="{{this.image}}" />
+          <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <h6>
+              <button>
+                <a class="nav-link" href="/me/stored/cats">Chi tiết</a>
+              </button>
+            </h6>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

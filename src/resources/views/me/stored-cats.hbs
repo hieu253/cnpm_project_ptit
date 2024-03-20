@@ -1,0 +1,77 @@
+<div class="mt-4">
+  <h3>Danh sách của tôi</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Thứ tự</th>
+        <th scope="col">Tên</th>
+        <th scope="col">Mô tả</th>
+
+        <th scope="col" colspan="2"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each cats}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.name}}</td>
+          <td>{{this.description}}</td>
+
+          <td>
+            <a href="/cats/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+            <a
+              href=""
+              class="btn btn-link"
+              data-toggle="modal"
+              data-id="{{this._id}}"
+              data-target="#delete-cat-modal"
+            >Xóa</a>
+
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div id="delete-cat-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác nhận</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có thực sự muốn xóa ?</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Huỷ</button>
+        <button id="btn-delete-cat" type="button" class="btn btn-primary">Xác
+          nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-cat-form" method="POST"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded',function(){ var catId; var
+  deleteForm = document.forms['delete-cat-form']; var btnDeletecat =
+  document.getElementById('btn-delete-cat');
+  $('#delete-cat-modal').on('show.bs.modal',function(event){ var button
+  =$(event.relatedTarget); catId = button.data('id'); }); btnDeletecat.onclick =
+  function(){ deleteForm.action = '/cats/' + catId + '?_method=DELETE';
+  deleteForm.submit(); } });
+
+</script>
